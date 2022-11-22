@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<title>Curriculum Vitae</title>
+		<meta name="color-scheme" content="only light">
 		<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" type='text/css'>
 		<link rel="stylesheet" href="./googlefonts/css/font.css" type='text/css'>
-		<script src="./paged/js/paged.polyfill.js"></script>
+		<script src="./pagedjs/js/paged.polyfill.js"></script>
 		<script src="./jquery/js/jquery.min.js"></script>
 		<script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="./fontawesome/js/all.min.js"></script>
@@ -67,33 +69,43 @@
 				z-index: 400;
 			}
 			.timeline-subtitle:before {
-				content: attr(year) ' - ';
+				content: attr(data-year) ' - ';
 			}
 			.icon {
 				display: inline-block;
 				width:1.25em;
 				text-align:center;
 			}
+			.fa-wikipedia-w:after {
+				content: 'User:';
+			}
 		</style>
 		<script>
-			let index = 1;
-			const setColor = function () {
-				let color = [
-					["#07575b", "#66a5ad", "#c4dfe6"], // Hijau
-					["#562270", "#9966cc", "#c9a0dc"], // Ungu
-					["#03045e", "#0077b6", "#00b4d8"], // Biru
-				];
-				const root = document.querySelector(':root');
-				colorSelect = color[index];
-				index += 1;
-				if (index === color.length) {
-					index = 0;
+			class changeColor {
+				#index = 1;
+				get setColor() {
+					return function() {
+						const colors = [
+							["#07575b", "#66a5ad", "#c4dfe6"], // Hijau
+							["#562270", "#9966cc", "#c9a0dc"], // Ungu
+							["#03045e", "#0077b6", "#00b4d8"], // Biru
+							["#771515", "#e04c4c", "#efa1a1"], // Merah
+						];
+						const root = document.querySelector(':root');
+						const colorSelect = colors[this.#index];
+						this.#index += 1;
+						if (this.#index === colors.length) {
+							this.#index = 0;
+						}
+						const cssVar = ["--warnaGelap", "--warnaMenengah", "--warnaTerang"];
+						for (let i = 0; i < colorSelect.length; i++) {
+							root.style.setProperty(cssVar[i], colorSelect[i]);
+						}
+						return false;
+					};
 				}
-				const cssVar = ["--warnaGelap", "--warnaMenengah", "--warnaTerang"];
-				for (let i = 0; i < colorSelect.length; i++) {
-					root.style.setProperty(cssVar[i], colorSelect[i]);
-				}
-			};
+			}
+			const change = new changeColor();
 		</script>
 	</head>
 	<body>
@@ -105,7 +117,7 @@
 				</h1>
 			</div>
 			<div class="col-sm-5 d-flex justify-content-end g-0">
-				<a class="text-white text-decoration-none" href="javascript:void(0);" onclick="setColor();"><img src="./assets/portrait.jpg"></a>
+				<img src="./assets/portrait.jpg" onclick="change.setColor();" alt="portrait">
 			</div>
 		</div>
 		<div class="row text-right" style="margin: 0px;">
@@ -139,7 +151,7 @@
 					</a>
 				</div>
 				<div>
-					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/w/index.php?title=Special%3ACentralAuth/Ekirahardian">
+					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/w/index.php?title=Special:CentralAuth/Ekirahardian">
 						<span class="fab fa-lg icon fa-wikipedia-w"></span>
 						<span>User:Ekirahardian</span>
 					</a>
@@ -158,11 +170,11 @@
 					<h3>EDUCATION</h3>
 					<ul class="timeline">
 						<li>
-							<h4 class="timeline-subtitle" year="2016">Senior High School</h4>
+							<h4 class="timeline-subtitle" data-year="2016">Senior High School</h4>
 							<span>SMA Negeri 3 Tangerang Selatan</span>
 						</li>
 						<li>
-							<h4 class="timeline-subtitle" year="2022">Bachelor of Computer	</h4>
+							<h4 class="timeline-subtitle" data-year="2022">Information Systems</h4>
 							<span>Sepuluh Nopember Institute of Technology</span>
 						</li>
 					</ul>
