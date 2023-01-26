@@ -5,7 +5,6 @@
 		<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" type='text/css'>
 		<link rel="stylesheet" href="./googlefonts/css/font.css" type='text/css'>
 		<meta name="color-scheme" content="only light">
-		<script src="./pagedjs/js/paged.polyfill.js"></script>
 		<script src="./jquery/js/jquery.min.js"></script>
 		<script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="./fontawesome/js/all.min.js"></script>
@@ -81,6 +80,9 @@
 			}
 		</style>
 		<script>
+			const loadScriptJS = function(url) {
+				$('<script/>').appendTo('head').attr('src',url).on('readystatechange').on('load');
+			};
 			class changeColor {
 				#index = 1;
 				get setColor() {
@@ -106,6 +108,9 @@
 				}
 			}
 			const change = new changeColor();
+			$(document).ready(function() {
+				loadScriptJS("./pagedjs/js/paged.polyfill.js");
+			});
 		</script>
 	</head>
 	<body>
@@ -122,47 +127,58 @@
 		</div>
 		<div class="row text-right" style="margin: 0px;">
 			<div class="col-sm-5 text-white">
-				<div>
+				<div id="contacts">
 					<h3 class="underline-white">CONTACTS</h3>
+					&emsp;
 				</div>
-				&emsp;
-				<div>
-					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="mailto:naufalrizky.r@gmail.com">
-						<span class="fab fa-lg icon fa-google"></span>
-						<span>naufalrizky.r@gmail.com</span>
-					</a>
-				</div>
-				<div>
-					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://wa.me/+6289513061535">
-						<span class="fab fa-lg icon fa-whatsapp"></span>
-						<span>+62 895-1306-1535</span>
-					</a>
-				</div>
-				<div>
-					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://github.com/EkiRahardian">
-						<span class="fab fa-lg icon fa-github"></span>
-						<span>EkiRahardian</span>
-					</a>
-				</div>
-				<div>
-					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://www.quora.com/profile/Naufal-Rizky-Rahardian">
-						<span class="fab fa-lg icon fa-quora"></span>
-						<span>Naufal Rizky Rahardian</span>
-					</a>
-				</div>
-				<div>
-					<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/Special:CentralAuth/Ekirahardian">
-						<span class="fab fa-lg icon fa-wikipedia-w"></span>
-						<span>User:Ekirahardian</span>
-					</a>
-				</div>
+				<script>
+					const contact = [
+						['google',
+							'naufalrizky.r@gmail.com',
+							'mailto:naufalrizky.r@gmail.com'
+						],
+						['whatsapp',
+							'+62 895-1306-1535',
+							'wa.me/+6289513061535'
+						],
+						['github',
+							'EkiRahardian',
+							'github.com/EkiRahardian'
+						],
+						['quora',
+							'Naufal Rizky Rahardian',
+							'www.quora.com/profile/Naufal-Rizky-Rahardian'
+						],
+						['linkedin',
+							'Naufal Rizky Rahardian',
+							'www.linkedin.com/in/naufal-rizky-rahardian'
+						],
+						['wikipedia-w',
+							'User:Ekirahardian',
+							'en.wikipedia.org/wiki/Special:CentralAuth/Ekirahardian'
+						],
+					];
+					let contactText = '';
+					for (let i = 0; i < contact.length; i++) {
+						contactText += '' +
+							'<div>' +
+								'<a class="text-white text-decoration-none" target="_blank" rel="noreferrer noopener" href="https://' + contact[i][2] + '">' +
+									'<span class="fab fa-lg icon fa-' + contact[i][0] + '"></span>' +
+									'<span> ' + contact[i][1] + '</span>' +
+								'</a>' +
+							'</div>' +
+						'';
+					}
+					$(contactText).insertAfter('#contacts');
+					contactText = undefined;
+				</script>
 				<br>
 				<div>
 					<h3 class="underline-white">ABOUT ME</h3>
 				</div>
 				&emsp;
 				<div>
-					I am a passionate programmer who loves finding new ways to automate things. One of them is when I need to generate thousands of images of the characters from writing systems around the world, I know it will be a chore to take screenshots of the characters one by one. So I tirelessly find a way to generate them automatically. The result is I successfully generated and uploaded more than 17.000 images to Wikimedia Commons.
+					I am a passionate programmer who enjoys finding new ways to automate things. One of the cases is when I need to generate thousands of images of characters from various writing systems. I know it will be a chore to take screenshots of the characters one at a time, so I tirelessly search for a way to generate them automatically. The result is more than 18.000 images generated and uploaded to Wikimedia Commons.
 				</div>
 			</div>
 			<div class="col-sm-7" style="color: var(--warnaGelap);">
@@ -184,7 +200,7 @@
 					<ul>
 						<li>
 							<span>
-								Automatically generated <a target="_blank" rel="noreferrer noopener" href="https://commons.wikimedia.org/w/index.php?search=insource%3Aauthor%3D%5B%5BUser%3AEkirahardian%7CEkirahardian%5D%5D&title=Special%3ASearch&profile=advanced&fulltext=1&ns6=1">more than 17.000 images</a>, including <a target="_blank" rel="noreferrer noopener" href="https://commons.wikimedia.org/w/index.php?search=intitle%3A%2FTANGUT+%28IDEOGRAPH%7CCOMPONENT%29-%5Cw*%2Fi+insource%3Aauthor%3D%5B%5BUser%3AEkirahardian%7CEkirahardian%5D%5D&title=Special%3ASearch&profile=advanced&fulltext=1&ns6=1">6913 images of Tangut characters</a> and automatically uploaded them to Wikimedia Commons using JavaScript, Unicode codepoints, Pywikibot, Batch script, etc., then use them to illustrate Unicode characters, <a target="_blank" rel="noreferrer noopener" href="https://en.wiktionary.org/wiki/Appendix:Unicode/Tangut">especially those that aren't typically represented in fonts</a>.
+								Automatically generated <a target="_blank" rel="noreferrer noopener" href="https://commons.wikimedia.org/w/index.php?search=insource%3Aauthor%3D%5B%5BUser%3AEkirahardian%7CEkirahardian%5D%5D&title=Special%3ASearch&profile=advanced&fulltext=1&ns6=1">more than 18.000 images</a>, including <a target="_blank" rel="noreferrer noopener" href="https://commons.wikimedia.org/w/index.php?search=intitle%3A%2FTANGUT+%28IDEOGRAPH%7CCOMPONENT%29-%5Cw*%2Fi+insource%3Aauthor%3D%5B%5BUser%3AEkirahardian%7CEkirahardian%5D%5D&title=Special%3ASearch&profile=advanced&fulltext=1&ns6=1">6913 images of Tangut characters</a>, <a target="_blank" rel="noreferrer noopener" href="https://commons.wikimedia.org/w/index.php?search=intitle%3A%2FKHITAN+SMALL+SCRIPT%5Cw%2A%2Fi+insource%3Aauthor%3D%5B%5BUser%3AEkirahardian%7CEkirahardian%5D%5D&title=Special:Search&profile=advanced&fulltext=1&ns6=1">470 images of Khitan small script characters</a>, and <a target="_blank" rel="noreferrer noopener" href="https://commons.wikimedia.org/w/index.php?search=intitle%3A%2FBATAK%5Cw%2A%2Fi+insource%3Aauthor%3D%5B%5BUser%3AEkirahardian%7CEkirahardian%5D%5D&title=Special:Search&profile=advanced&fulltext=1&ns6=1">56 images of Batak characters</a> using JavaScript, Unicode codepoints, Batch script, etc., then integrated them into Wikidata using Python and Pywikibot. The characters in question are used to illustrate Unicode characters, <a target="_blank" rel="noreferrer noopener" href="https://en.wiktionary.org/wiki/Appendix:Unicode/Khitan_Small_Script">especially those not typically represented in fonts</a>.
 							</span>
 						</li>
 						<li>
